@@ -66,7 +66,8 @@
                             <td>{{ $type_service->name_service }}</td>
                             <td>{{ $type_service->desc_service }}</td>
                             <td>
-                                <button class="btn btn-warning">Edit</button>
+                                {{-- <button class="btn btn-warning">Edit</button> --}}
+                                <a href="{{ route('type-service.edit', $type_service->id) }}" class="btn btn-warning">Edit</a>
                                 <button class="btn btn-danger">Delete</button>
                             </td>
                         </tr>

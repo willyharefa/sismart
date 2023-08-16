@@ -11,6 +11,7 @@ class TypeService extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $table = 'type_services';
 
     public function ticket(): BelongsTo
     {
