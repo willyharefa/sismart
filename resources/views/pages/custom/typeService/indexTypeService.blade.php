@@ -12,6 +12,10 @@
         @endif
         {{-- End Alert --}}
 
+        @foreach ($errors->all() as $item)
+            <div class="alert alert-danger">{{ $item }}</div>
+        @endforeach
+
         <div class="wrapper-card">
             <div class="card">
                 <div class="card-header">
@@ -19,26 +23,23 @@
                 </div>
                 <div class="card-body">
                     <form class="needs-validation" action="{{ route('type-service.store') }}" method="POST" novalidate>
-                        @csrf
                         @method('POST')
+                        @csrf
                         <div class="row g-2 mb-3">
                             <label for="name_action" class="col-sm-2 col-form-label">Name Services</label>
                             <div class="col-sm">
-                                <input type="text" class="form-control" id="name_service" name="name_service" placeholder="Name of services" required
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip"
-                                data-bs-title="Masukan kategori layanan purna jual anda"
-                                >
+                                <input type="text" class="form-control" id="name_service" name="name_service"
+                                    placeholder="Name of services" required data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-custom-class="custom-tooltip"
+                                    data-bs-title="Masukan kategori layanan purna jual anda">
                             </div>
                         </div>
                         <div class="row g-2 mb-3">
                             <label for="detail_action" class="col-sm-2 col-form-label">Description</label>
                             <div class="col">
-                                <textarea class="form-control" placeholder="Type description of services..." name="desc_service" id="desc_service" rows="3" required
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip"
-                                data-bs-title="Masukan deskripsi dari kategori anda"
-                                ></textarea>
+                                <textarea class="form-control" placeholder="Type description of services..." name="desc_service" id="desc_service"
+                                    rows="3" required data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                                    data-bs-title="Masukan deskripsi dari kategori anda"></textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Create Services</button>
@@ -47,7 +48,7 @@
             </div>
         </div>
 
-        {{-- Table Tickets --}} 
+        {{-- Table Tickets --}}
         <div class="table-responsive mt-5">
             <div class="table">
                 <table id="example" class="table table-striped nowrap table-sm" width="100%">
@@ -61,16 +62,26 @@
                     </thead>
                     <tbody>
                         @foreach ($type_services as $key => $type_service)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $type_service->name_service }}</td>
-                            <td>{{ $type_service->desc_service }}</td>
-                            <td>
-                                {{-- <button class="btn btn-warning">Edit</button> --}}
-                                <a href="{{ route('type-service.edit', $type_service->id) }}" class="btn btn-warning">Edit</a>
-                                <button class="btn btn-danger">Delete</button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $type_service->name_service }}</td>
+                                <td>{{ $type_service->desc_service }}</td>
+                                <td>
+                                    {{-- <button class="btn btn-warning">Edit</button> --}}
+                                    {{-- <div class="d-flex"> --}}
+                                    <a href="{{ route('type-service.edit', $type_service->id) }}"
+                                        class="btn btn-warning btn-sm">Edit</a>
+
+                                    <form action="{{ route('type-service.destroy', $type_service->id) }}" method="POST"
+                                        class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm" type="submit"
+                                            onclick="return confirm('Are you sure delete this data?')">Delete</button>
+                                    </form>
+                                    {{-- </div> --}}
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

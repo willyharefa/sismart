@@ -68,6 +68,7 @@ class ProspectController extends Controller
         $ticket = Ticket::with('prospects')->find($prospect->ticket_id);
         return view('pages.activities.prospect.updateProspect', [
             'title'=> 'Action Page',
+            'menu_title' => 'ticket'
         ], compact(['prospect','ticket', 'typeActions']));
     }
 

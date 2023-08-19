@@ -16,7 +16,7 @@ class KonsumenController extends Controller
         // dd($customers);
         return view('pages.customers.indexCustomers', [
             'title' => 'Customer',
-            'menu_title' => 'konsumen'
+            'menu_title' => 'customer'
         ], compact('customers'));
     }
 
@@ -45,7 +45,8 @@ class KonsumenController extends Controller
     {
         
         return view('pages.customers.editCustomers', [
-            'title' => 'Edit Customer'
+            'title' => 'Edit Customer',
+            'menu_title' => 'customer'
         ], compact('konsumen'));
     }
 

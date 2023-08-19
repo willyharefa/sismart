@@ -8,7 +8,16 @@
 
 @section('content')
     <div class="wrapper-container">
-        <legend class="m-3">Ticket Page</legend>
+        {{-- Breadcrumb Navbar --}}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('ticket.index') }}">Tickets</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit</li>
+            </ol>
+        </nav>
+        {{-- End Breadcrumb Navbar --}}
+
+        <legend class="mb-3">Update Ticket</legend>
 
         {{-- Alert Success --}}
         @if ($message = Session::get('success'))
@@ -52,23 +61,17 @@
                             <div class="col-sm-4">
                                 <select class="form-select" id="type_customer" name="category_customer" required>
                                     <option selected value="" disabled>Category Customer</option>
-                                    <option value="PDAM/UPTD" {{ $ticket->category_customer == "PDAM/UPTD" ? "selected" : "" }} >PDAM/UPTD</option>
-                                    <option value="Hotel" {{ $ticket->category_customer == "Hotel" ? "selected" : "" }} >Hotel</option>
-                                    <option value="PKS/Industry" {{ $ticket->category_customer == "PKS/Industry" ? "selected" : "" }} >PKS/Industry</option>
+                                    @foreach ($type_customers as $type_customer)
+                                        <option value="{{ $type_customer->id }}" {{ $type_customer->id == $ticket->type_customer_id ? "selected" : '' }}>{{ $type_customer->name_type_customer }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm">
                                 <select class="form-select" name="type_service" required>
                                     <option selected value="" disabled>Type Services</option>
-                                    <option value="General Chemical">General Chemical</option>
-                                    <option value="Boiler Chemical">Boiler Chemical</option>
-                                    <option value="Specialty Chemical">Specialty Chemical</option>
-                                    <option value="General Chemical & Boiler Chemical">General Chemical & Boiler Chemical
-                                    </option>
-                                    <option value="General Chemical & Specialty Chemical">General Chemical & Specialty
-                                        Chemical</option>
-                                    <option value="Specialty Chemical & Boiler Chemical">Specialty Chemical & Boiler
-                                        Chemical</option>
+                                    @foreach ($type_services as $type_service)
+                                        <option value="{{ $type_service->id }}" {{ $type_service->id == $ticket->type_service_id ? "selected" : ""}}>{{ $type_service->name_service }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -76,71 +79,36 @@
                             <label for="sales_a" class="col-sm-2 col-form-label">Sales / Marketing</label>
                             <div class="col-sm">
                                 <input type="text" class="form-control" name="sales_pic_a" required
-                                    placeholder="Sales A">
+                                    placeholder="Sales A" value="{{ $ticket->sales_pic_a }}">
                             </div>
                             <div class="col-sm">
                                 <input type="text" class="form-control" name="sales_pic_b" required
-                                    placeholder="Sales B (Optional)">
+                                    placeholder="Sales B (Optional)" value="{{ $ticket->sales_pic_b }}">
                             </div>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" name="sales_pic_c" required
-                                    placeholder="Sales C (Optional)">
+                                    placeholder="Sales C (Optional)" value="{{ $ticket->sales_pic_c }}">
                             </div>
                         </div>
                         <div class="row g-2 mb-3">
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Please fill a descripion of ticket activities" id="desc_ticket"
-                                    style="height: 140px" name="desc_ticket" required></textarea>
+                                    style="height: 140px" name="desc_ticket" required>{{ $ticket->desc_ticket }}</textarea>
                                 <label for="desc_ticket">Description Ticket</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Create Ticket</button>
+                        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure to save this ?')">Save Changes</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="wrapper-card">
-            <div class="card">
-                <div class="card-header">
-                    Data Ticket
-                </div>
-                <div class="card-body">
-                    <form class="needs-validation" action="{{ route('ticket.update', $ticket->id) }}" method="POST" novalidate>
-                        @csrf
-                        @method('PUT')
-                        <div class="row g-2 mb-3">
-                            <label for="name_action" class="col-sm-2 col-form-label">Name Action</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="name_action" name="name_action" placeholder="Name of action" required>
-                            </div>
-                            <div class="col-sm">
-                                <select class="form-select" name="status_action" required>
-                                    <option selected value="">Choose Categories...</option>
-                                    <option value="Prospect">Prospect</option>
-                                    <option value="Hot Prospect">Hot Prospect</option>
-                                  </select>
-                            </div>
-                        </div>
-                        <div class="row g-2 mb-3">
-                            <label for="detail_action" class="col-sm-2 col-form-label">Description</label>
-                            <div class="col">
-                                <textarea class="form-control" placeholder="Type detail of action..." name="detail_action" id="detail_action" rows="3" required></textarea>
-                            </div>
-                        </div>
-                        <a href="{{ route('ticket.index') }}" class="btn btn-secondary">Back To Tickets</a>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
-
+{{-- Select Search Plugin (Seacrch Customer) --}}
 @push('custom-script')
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $('#single-select-clear-field').select2({

@@ -18,9 +18,9 @@
             </div>
         @endif
 
-        <div class="alert alert-secondary text-black" role="alert">
-            <h4 class="alert-heading">Information</h4>
-            <p>Create your ticket to make activities, enjoy !</p>
+        <div class="alert alert-primary text-black" role="alert">
+            <h4 class="alert-heading mb-2">Information</h4>
+            <p class="mb-0">Create your ticket to make activities, enjoy !</p>
         </div>
 
         <div class="wrapper-card">
@@ -52,17 +52,17 @@
                             </div>
                         </div>
                         <div class="row g-2 mb-3">
-                            <label for="type_customer" class="col-sm-2 col-form-label">Type Customer</label>
+                            <label for="type_customer_id" class="col-sm-2 col-form-label">Type Customer</label>
                             <div class="col-sm-4">
-                                <select class="form-select" id="type_customer" name="category_customer" required>
+                                <select class="form-select" id="type_customer_id" name="type_customer_id" required>
                                     <option selected value="" disabled>Category Customer</option>
-                                    <option value="PDAM/UPTD">PDAM/UPTD</option>
-                                    <option value="Hotel">Hotel</option>
-                                    <option value="PKS/Industry">PKS/Industry</option>
+                                    @foreach ($type_customers as $type_customer)
+                                        <option value="{{ $type_customer->id }}">{{ $type_customer->name_type_customer }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm">
-                                <select class="form-select" name="type_service" required>
+                                <select class="form-select" name="type_service_id" required>
                                     <option selected value="" disabled>Type Services</option>
                                     @foreach ($type_services as $type_service)
                                         <option value="{{ $type_service->id }}">{{ $type_service->name_service }}</option>
@@ -121,16 +121,16 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $ticket->cd_ticket }}</td>
-                                <td>{{ $ticket->konsumen->name_company }}</td>
-                                <td>{{ $ticket->category_customer }}</td>
-                                <td>{{ $ticket->type_service }}</td>
+                                <td>{{ $ticket->konsumens->name_company }}</td>
+                                <td>{{ $ticket->type_customer->name_type_customer }}</td>
+                                <td>{{ $ticket->type_service->name_service }}</td>
                                 <td>{{ $ticket->sales_pic_a }}</td>
                                 <td>{{ $ticket->status }}</td>
                                 <td>{{ $ticket->prospects == null ? 'Draf' : $ticket->prospects->type_action->name_action }}</td>
                                 <td>
                                     @if ($ticket->status == 'Draf')
                                         <!-- Modal Start Prospect-->
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#modalStartProspect_{{ $ticket->id }}">
                                             <i class='bx bx-play-circle'></i>
                                             Start Prospect
@@ -210,17 +210,17 @@
                                             </div>
                                         </div>
                                     @else
-                                        <a type="button" class="btn btn-info"
+                                        <a type="button" class="btn btn-info btn-sm"
                                             href="{{ route('prospect.show', $ticket->prospects->id) }}">
                                             <i class='bx bxs-chevrons-up bx-flashing'></i>
                                             Update Progress
                                         </a>
                                     @endif
-                                    <a class="btn btn-warning" href="{{ route('ticket.show', $ticket->id) }}">Edit</a>
+                                    <a class="btn btn-warning btn-sm" href="{{ route('ticket.show', $ticket->id) }}">Edit</a>
                                     <form action="" method="POST" class="d-inline-block">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger d-inline-block"
+                                        <button type="submit" class="btn btn-sm btn-danger d-inline-block"
                                             onclick="return confirm('Are you sure ?')">Delete</button>
                                     </form>
                                 </td>
@@ -238,7 +238,6 @@
 
 @push('custom-script')
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $('#single-select-clear-field').select2({

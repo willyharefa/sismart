@@ -98,7 +98,7 @@
                     </li>
 
                     <!-- Cards -->
-                    <li class="menu-item {{ $menu_title == 'konsumen' ? 'active' : '' }}">
+                    <li class="menu-item {{ $menu_title == 'customer' ? 'active' : '' }}">
                         <a href="{{ route('konsumens.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-collection"></i>
                             <div>Customer</div>
@@ -218,7 +218,7 @@
                     </li>
                     <!-- Customize -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Customize</span></li>
-                    <li class="menu-item {{ $menu_title == 'custome-services' ? 'active' : '' }}">
+                    <li class="menu-item {{ $menu_title == 'custom-services' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                             <div data-i18n="Misc">Services</div>
@@ -228,7 +228,7 @@
                                 <a href="{{ route('type-action.index') }}" class="menu-link">Action Lists</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#" class="menu-link">Type Customers</a>
+                                <a href="{{ route('type-customer.index') }}" class="menu-link">Type Customers</a>
                             </li>
                             <li class="menu-item">
                                 <a href="{{ route('type-service.index') }}" class="menu-link">Type Services</a>

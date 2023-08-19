@@ -17,8 +17,7 @@ return new class extends Migration
             $table->foreignId('konsumen_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('phone_number');
             $table->string('name_pic');
-            $table->string('category_customer');
-            // $table->string('type_service');
+            $table->foreignId('type_customer_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('type_service_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('sales_pic_a');
             $table->string('sales_pic_b');

@@ -71,8 +71,8 @@
                                 </div>
                             </td>
                             <td>
-                                <button class="btn btn-warning">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                                <a class="btn btn-warning btn-sm" href="{{ route('type-action.edit', $typeAction->id) }}">Edit</a>
+                                <button class="btn btn-danger btn-sm">Delete</button>
                             </td>
                         </tr>
                         @endforeach

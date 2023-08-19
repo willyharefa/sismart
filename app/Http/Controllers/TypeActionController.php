@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TypeAction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TypeActionController extends Controller
 {
@@ -15,7 +16,7 @@ class TypeActionController extends Controller
         $typeActions = TypeAction::all();
         return view('pages.custom.typeAction.indexTypeAction', [
             'title' => 'Type Action',
-            'menu_title' => 'custome-services'
+            'menu_title' => 'custom-services'
         ], compact('typeActions'));
     }
 
@@ -59,7 +60,10 @@ class TypeActionController extends Controller
      */
     public function edit(TypeAction $typeAction)
     {
-        //
+        return view('pages.custom.typeAction.updateTypeAction', [
+            'title' => 'Edit Action',
+            'menu_title' => 'custom-services'
+        ], compact('typeAction'));
     }
 
     /**
@@ -67,7 +71,23 @@ class TypeActionController extends Controller
      */
     public function update(Request $request, TypeAction $typeAction)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'name_action' => 'required',
+                'status_action' => 'required',
+                'detail_action' => 'required'
+            ]);
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $typeAction->update($request->all());
+            return redirect()->route('type-action.index')->with('success', 'Data telah berhasil diperbaharui');
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

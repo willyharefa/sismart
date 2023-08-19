@@ -20,7 +20,7 @@
                     <div class="row g-2 mb-3">
                         <label for="company" class="col-sm-2 col-form-label">Company</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" readonly id="company" placeholder="Company" value="{{ $ticket->konsumen->name_company }}">
+                            <input type="text" class="form-control" readonly id="company" placeholder="Company" value="{{ $ticket->konsumens->name_company }}">
                         </div>
                         <div class="col-sm">
                             <input type="text" class="form-control" readonly value="{{ $ticket->phone_number }}">
@@ -35,7 +35,7 @@
                             <input type="date" class="form-control" readonly value="{{ $prospect->date_progress }}" title="Current Date plan action">
                         </div>
                         <div class="col-sm">
-                            <input type="text" class="form-control" readonly value="{{ $ticket->type_service }}" title="Services plan to customer">
+                            <input type="text" class="form-control" readonly value="{{ $ticket->type_service->name_service }}" title="Services plan to customer">
                         </div>
                         <div class="col-sm">
                             <input type="text" class="form-control" readonly value="{{ $prospect->type_action->name_action }}" title="Current Progress">

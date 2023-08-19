@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Konsumen;
 use App\Models\Ticket;
 use App\Models\TypeAction;
+use App\Models\TypeCustomer;
 use App\Models\TypeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,11 +20,12 @@ class TicketController extends Controller
         $konsumens = Konsumen::all();
         $typeActions = TypeAction::all();
         $type_services = TypeService::all();
-        $tickets = Ticket::with('prospects')->orderBy('id', 'DESC')->get();
+        $type_customers = TypeCustomer::all();
+        $tickets = Ticket::with('prospects','konsumens', 'type_service', 'type_customer')->orderBy('id', 'DESC')->get();
         return view('pages.activities.tickets.indexTickets', [
             'title'=> 'Ticket Page',
             'menu_title' => 'ticket'
-        ], compact('tickets', 'konsumens', 'typeActions', 'type_services'));
+        ], compact('tickets', 'konsumens', 'typeActions', 'type_services', 'type_customers'));
     }
 
     /**
@@ -52,9 +54,12 @@ class TicketController extends Controller
     public function show(Ticket $ticket)
     {
         $konsumens = Konsumen::all();
+        $type_customers = TypeCustomer::all();
+        $type_services = TypeService::all(); 
         return view('pages.activities.tickets.updateTicket', [
             'title' => 'Update Ticket',
-        ], compact('ticket', 'konsumens'));
+            'menu_title' => 'ticket'
+        ], compact('ticket', 'konsumens', 'type_customers', 'type_services'));
     }
 
     /**

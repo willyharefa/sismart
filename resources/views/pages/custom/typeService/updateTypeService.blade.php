@@ -19,7 +19,7 @@
                         <div class="row g-2 mb-3">
                             <label for="name_action" class="col-sm-2 col-form-label">Name Services</label>
                             <div class="col-sm">
-                                <input type="number" class="form-control" id="name_service" name="name_service" placeholder="Name of services"
+                                <input type="text" class="form-control" id="name_service" name="name_service" placeholder="Name of services"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-custom-class="custom-tooltip"
                                 data-bs-title="Masukan kategori layanan purna jual anda"

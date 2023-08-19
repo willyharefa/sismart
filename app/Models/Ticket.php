@@ -11,20 +11,26 @@ class Ticket extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $table = 'tickets';
 
     public function prospects(): HasOne
     {
         return $this->hasOne(Prospect::class);
     }
 
-    public function konsumen(): BelongsTo
+    public function konsumens(): BelongsTo
     {
-        return $this->belongsTo(Konsumen::class);
+        return $this->belongsTo(Konsumen::class, 'id');
     }
 
     public function type_service(): HasOne
     {
-        return $this->hasOne(TypeService::class, 'type_service_id');
+        return $this->hasOne(TypeService::class, 'id');
+    }
+
+    public function type_customer(): HasOne
+    {
+        return $this->hasOne(TypeCustomer::class, 'id');
     }
 
 }

@@ -132,7 +132,7 @@
                                 <td>{{ $customer->city }}</td>
                                 <td>
                                     <!-- Modal Detail-->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#modalDetail_{{ $customer->id }}">
                                         Detail
                                     </button>
@@ -207,11 +207,11 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <a class="btn btn-warning" href="{{ route('konsumens.show', $customer->id) }}">Edit</a>
+                                    <a class="btn btn-warning btn-sm" href="{{ route('konsumens.show', $customer->id) }}">Edit</a>
                                     <form action="{{ route('konsumens.destroy', $customer->id) }}" method="POST" class="d-inline-block">
                                       @method('DELETE')
                                       @csrf
-                                      <button type="submit" class="btn btn-danger d-inline-block" onclick="return confirm('Are you sure ?')">Delete</button>
+                                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure ?')">Delete</button>
                                     </form>
                                 </td>
                             </tr>

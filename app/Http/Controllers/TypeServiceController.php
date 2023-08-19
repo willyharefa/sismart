@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TypeService;
 use Dotenv\Exception\ValidationException;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,7 +17,7 @@ class TypeServiceController extends Controller
         $type_services = TypeService::all();
         return view('pages.custom.typeService.indexTypeService', [
             'title' => 'Type Services',
-            'menu_title' => 'custome-services'
+            'menu_title' => 'custom-services'
         ], compact('type_services'));
     }
 
@@ -35,22 +34,18 @@ class TypeServiceController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $validateData = $request->validate([
-            'name_service' => 'required|string',
-            'desc_service' => 'required|string',
+
+        $validator = Validator::make($request->all(), [
+            'name_service' => 'required',
+            'desc_service' => 'required'
         ]);
 
-        // dd($validateData);
-
-        try {
-            if($validateData) {
-                TypeService::create($validateData);
-                return redirect()->back()->with('success', 'Data services has been add');
-            }
-        } catch (\Throwable $th) {
-            throw $th;
+        if($validator->fails()) {        
+            return redirect()->back()->withErrors($validator);
         }
+
+        TypeService::create($request->all());
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
 
     }
 
@@ -69,7 +64,7 @@ class TypeServiceController extends Controller
     {
         return view('pages.custom.typeService.updateTypeService', [
             'title' => 'Edit Service',
-            'menu_title' => 'custome-services'
+            'menu_title' => 'custom-services'
         ], compact('typeService'));
     }
 
@@ -78,26 +73,21 @@ class TypeServiceController extends Controller
      */
     public function update(Request $request, TypeService $typeService)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'name_service' => 'required',
-        //     'desc_service' => 'required|string',
-        // ]);
-        $validated = $request->validate([
-            'name_service' => 'required|string',
-            'desc_service' => 'required|string',
-        ]);
+            $validator = Validator::make($request->all(), [
+                'name_service' => 'required',
+                'desc_service' => 'required',
+            ]);
 
-        dd($validated);
+            if ( $validator->fails() ) {
+                return redirect()->back()->withErrors($validator);
+            }
 
+            $typeService->update([
+                'name_service' => $request->name_service,
+                'desc_service' => $request->desc_service
+            ]);
 
-        // try {
-           
-        // } catch (ValidationException $e) {
-            
-        //     return redirect()->back()->withErrors($e);
-        // }
-
-
+            return redirect()->route('type-service.index')->with('success', 'Data telah berhasil diperbaharui');
     }
 
     /**
@@ -105,6 +95,8 @@ class TypeServiceController extends Controller
      */
     public function destroy(TypeService $typeService)
     {
-        //
+        $typeService->delete();
+        return redirect()->back()->with('success', 'Data telah berhasil di hapus');
+
     }
 }

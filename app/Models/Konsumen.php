@@ -11,9 +11,10 @@ class Konsumen extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $table = 'konsumens';
 
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class, 'id');
     }
 }
