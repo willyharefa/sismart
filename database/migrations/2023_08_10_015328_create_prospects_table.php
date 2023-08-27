@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('prospects', function (Blueprint $table) {
             $table->id();
             $table->foreignId('ticket_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('type_action_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('type_action_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade')->nullOnDelete();
             $table->date('date_progress');
             $table->text('issue');
             $table->text('desc_action');

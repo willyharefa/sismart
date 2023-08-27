@@ -72,7 +72,11 @@
                             </td>
                             <td>
                                 <a class="btn btn-warning btn-sm" href="{{ route('type-action.edit', $typeAction->id) }}">Edit</a>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <form action="{{ route('type-action.destroy', $typeAction->id) }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure delete this ?')">Delete</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

@@ -12,11 +12,11 @@ class Prospect extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    // protected $table ='tickets';
+    protected $table ='prospects';
 
     public function tickets(): BelongsTo
     {
-        return $this->belongsTo(Ticket::class, 'tickets_id');
+        return $this->belongsTo(Ticket::class, 'ticket_id');
     }
 
     public function type_action(): BelongsTo

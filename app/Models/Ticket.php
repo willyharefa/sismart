@@ -15,22 +15,22 @@ class Ticket extends Model
 
     public function prospects(): HasOne
     {
-        return $this->hasOne(Prospect::class);
+        return $this->hasOne(Prospect::class, 'id');
     }
 
     public function konsumens(): BelongsTo
     {
-        return $this->belongsTo(Konsumen::class, 'id');
+        return $this->belongsTo(Konsumen::class, 'konsumen_id');
     }
 
     public function type_service(): HasOne
     {
-        return $this->hasOne(TypeService::class, 'id');
+        return $this->hasOne(TypeService::class, 'id', 'type_service_id');
     }
 
     public function type_customer(): HasOne
     {
-        return $this->hasOne(TypeCustomer::class, 'id');
+        return $this->hasOne(TypeCustomer::class, 'id', 'type_customer_id');
     }
 
 }

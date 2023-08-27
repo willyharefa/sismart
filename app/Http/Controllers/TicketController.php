@@ -9,6 +9,7 @@ use App\Models\TypeCustomer;
 use App\Models\TypeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TicketController extends Controller
 {
@@ -21,7 +22,7 @@ class TicketController extends Controller
         $typeActions = TypeAction::all();
         $type_services = TypeService::all();
         $type_customers = TypeCustomer::all();
-        $tickets = Ticket::with('prospects','konsumens', 'type_service', 'type_customer')->orderBy('id', 'DESC')->get();
+        $tickets = Ticket::with('prospects','konsumens', 'type_service', 'type_customer')->latest()->get();
         return view('pages.activities.tickets.indexTickets', [
             'title'=> 'Ticket Page',
             'menu_title' => 'ticket'
@@ -75,7 +76,30 @@ class TicketController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'konsumen_id' => 'required|numeric',
+                'phone_number' => 'required',
+                'name_pic' => 'required|max:32',
+                'type_customer_id' => 'required|numeric',
+                'type_service_id' => 'required|numeric',
+                'sales_pic_a' => 'required',
+                'sales_pic_b' => 'required',
+                'sales_pic_c' => 'required',
+                'desc_ticket' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $ticket->update($request->all());
+            return redirect()->route('ticket.index')->with('success', 'Data ticket telah berhasil diperbaharui');
+
+        } catch (\Throwable $th) {
+            return redirect()->route('ticket.index')->with('failed', 'Permintaan anda tidak valid');
+        }
+
     }
 
     /**

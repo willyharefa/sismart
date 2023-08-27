@@ -15,6 +15,6 @@ class TypeCustomer extends Model
 
     public function ticket(): BelongsTo
     {
-        return $this->belongsTo(Ticket::class, 'id');
+        return $this->belongsTo(Ticket::class, 'type_customer_id');
     }
 }

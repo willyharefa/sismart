@@ -48,8 +48,9 @@ class ProspectController extends Controller
 
         try {
             $ticket = Ticket::findOrFail($request->ticket_id);
+            $typeActions = TypeAction::findOrFail($request->type_action_id);
             $ticket->update([
-                'status' => 'Prospect'
+                'status' => $typeActions->status_action
             ]);
         } catch (ModelNotFoundException $th) {
             return redirect()->back()->with('failed', 'Data ticket tidak tersedia');
@@ -85,15 +86,28 @@ class ProspectController extends Controller
      */
     public function update(Request $request, Prospect $prospect)
     {
-        // dd($request);
+
+        $statusAction = TypeAction::findOrFail($request->type_action_id);
+        $ticket = Ticket::findOrFail($request->ticket_id);
+
         try {
-            $validate = $request->validate([
+            $validator = Validator::make($request->all(), [
                 'date_progress' => 'required|date',
-                'remarks' => 'required|string|max:200',
-                'issue' => 'required|string',
-                'desc_action' => 'required|string',
-                'type_action_id' => 'required|integer'
+                'remarks' => 'required|max:200',
+                'issue' => 'required',
+                'desc_action' => 'required',
+                'type_action_id' => 'required|numeric'
             ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $ticket->update([
+                'status' => $statusAction->status_action
+            ]);
+
+
             $prospect->update([
                 'date_progress' => $request->date_progress,
                 'issue' => $request->issue,
@@ -102,10 +116,7 @@ class ProspectController extends Controller
                 'remarks' => $request->remarks
             ]);
             return redirect()->route('ticket.index')->with('success', 'Progress action telah diupdate');
-
-            if(!$validate) {
-                return redirect()->back()->with('failed', 'Tidak dapat menyimpan data, pastikan data yang dimasukan valid');
-            }
+            
         } catch (\Throwable $th) {
             throw $th;
         }

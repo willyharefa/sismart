@@ -126,7 +126,15 @@
                                 <td>{{ $ticket->type_service->name_service }}</td>
                                 <td>{{ $ticket->sales_pic_a }}</td>
                                 <td>{{ $ticket->status }}</td>
-                                <td>{{ $ticket->prospects == null ? 'Draf' : $ticket->prospects->type_action->name_action }}</td>
+                                <td>
+                                    @if ($ticket->prospects == null)
+                                        Draf
+                                    @elseif($ticket->prospects->type_action_id == null)
+                                        Unavailable
+                                    @else
+                                        {{ $ticket->prospects->type_action->name_action }}
+                                    @endif
+                                </td>
                                 <td>
                                     @if ($ticket->status == 'Draf')
                                         <!-- Modal Start Prospect-->

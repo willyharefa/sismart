@@ -14,6 +14,6 @@ class TypeAction extends Model
 
     public function prospect(): HasOne
     {
-        return $this->hasOne(Prospect::class);
+        return $this->hasOne(Prospect::class, 'id');
     }
 }

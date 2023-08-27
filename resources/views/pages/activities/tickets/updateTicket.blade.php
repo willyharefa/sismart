@@ -26,6 +26,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+
+        {{-- Alert Failed --}}
+        @if ($message = Session::get('failed'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3 text-black" role="alert">
+                {{ $message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         {{-- End Alert --}}
 
         <div class="wrapper-card">
@@ -34,9 +42,9 @@
                     Formulir Tickets
                 </div>
                 <div class="card-body">
-                    <form class="needs-validation" action="{{ route('ticket.store') }}" method="POST" novalidate>
+                    <form class="needs-validation" action="{{ route('ticket.update', $ticket->id) }}" method="POST" novalidate>
                         @csrf
-                        @method('POST')
+                        @method('PUT')
                         <div class="row g-2 mb-3">
                             <label for="single-select-field" class="col-sm-2 col-form-label">Company</label>
                             <div class="col-sm-5">
@@ -57,9 +65,9 @@
                             </div>
                         </div>
                         <div class="row g-2 mb-3">
-                            <label for="type_customer" class="col-sm-2 col-form-label">Type Customer</label>
+                            <label for="type_customer_id" class="col-sm-2 col-form-label">Type Customer</label>
                             <div class="col-sm-4">
-                                <select class="form-select" id="type_customer" name="category_customer" required>
+                                <select class="form-select" id="type_customer_id" name="type_customer_id" required>
                                     <option selected value="" disabled>Category Customer</option>
                                     @foreach ($type_customers as $type_customer)
                                         <option value="{{ $type_customer->id }}" {{ $type_customer->id == $ticket->type_customer_id ? "selected" : '' }}>{{ $type_customer->name_type_customer }}</option>
@@ -67,7 +75,7 @@
                                 </select>
                             </div>
                             <div class="col-sm">
-                                <select class="form-select" name="type_service" required>
+                                <select class="form-select" name="type_service_id" required>
                                     <option selected value="" disabled>Type Services</option>
                                     @foreach ($type_services as $type_service)
                                         <option value="{{ $type_service->id }}" {{ $type_service->id == $ticket->type_service_id ? "selected" : ""}}>{{ $type_service->name_service }}</option>

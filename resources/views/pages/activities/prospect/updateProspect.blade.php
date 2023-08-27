@@ -38,7 +38,11 @@
                             <input type="text" class="form-control" readonly value="{{ $ticket->type_service->name_service }}" title="Services plan to customer">
                         </div>
                         <div class="col-sm">
-                            <input type="text" class="form-control" readonly value="{{ $prospect->type_action->name_action }}" title="Current Progress">
+                            @if ($prospect->type_action_id == null)
+                                <input type="text" class="form-control" readonly value="Unavailable" title="Current Progress">
+                            @else
+                                <input type="text" class="form-control" readonly value="{{ $prospect->type_action->name_action }}" title="Current Progress">
+                            @endif
                         </div>
                     </div>
                     <div class="row g-2 mb-3">
@@ -70,6 +74,7 @@
                             <label for="date_progress" class="col-sm-2 col-form-label">Date Action</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" id="date_progress" name="date_progress" required title="Date action">
+                                <input type="hidden" value="{{ $ticket->id }}" name="ticket_id">
                             </div>
                             <div class="col-sm">
                                 <select class="form-select" required name="type_action_id" id="actionProgress">

@@ -15,7 +15,7 @@ class TypeService extends Model
 
     public function ticket(): BelongsTo
     {
-        return $this->belongsTo(Ticket::class, 'ticket_id');
+        return $this->belongsTo(Ticket::class, 'id', 'type_service_id');
     }
 
 }

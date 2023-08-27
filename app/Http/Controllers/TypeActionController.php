@@ -95,6 +95,7 @@ class TypeActionController extends Controller
      */
     public function destroy(TypeAction $typeAction)
     {
-        //
+        $typeAction->delete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }
