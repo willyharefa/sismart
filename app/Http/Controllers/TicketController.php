@@ -42,9 +42,10 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request['cd_ticket'] = 'T-'.Carbon::now()->timestamp;
-        $request['status'] = 'Draf';
+        $request['status_ticket'] = 'draf';
+
+
         Ticket::create($request->all());
         return redirect()->route('ticket.index')->with('success', 'Data ticket berhasil ditambahkan');
     }

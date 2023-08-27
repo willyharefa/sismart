@@ -31,7 +31,14 @@
                                     <option selected value="">Choose Categories...</option>
                                     <option value="Prospect">Prospect</option>
                                     <option value="Hot Prospect">Hot Prospect</option>
-                                  </select>
+                                </select>
+                            </div>
+                            <div class="col-sm">
+                                <select class="form-select" name="priority_action" required>
+                                    <option selected value="">Choose Level...</option>
+                                    <option value="prospect-progress">On Progress</option>
+                                    <option value="prospect-final">Final Progress</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row g-2 mb-3">

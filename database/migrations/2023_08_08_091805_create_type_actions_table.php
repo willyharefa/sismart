@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name_action');
             $table->text('detail_action');
             $table->enum('status_action', ['Prospect', 'Hot Prospect']);
+            $table->enum('priority_action',['prospect','hot-prospect', 'loss-prospect', 'final-prospect']);
             $table->timestamps();
         });
     }

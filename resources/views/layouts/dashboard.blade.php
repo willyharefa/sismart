@@ -9,6 +9,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
 
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -113,7 +114,28 @@
                         </a>
                     </li>
 
-                    <!-- Layouts -->
+                    <!-- Menu Prospect -->
+                    <li class="menu-item {{ $menu_title == 'prospects' ? 'active' : '' }}">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div data-i18n="Layouts">Prospects</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('hot-prospect.index') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Hot Prospect</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-without-navbar.html" class="menu-link">
+                                    <div data-i18n="Without navbar">Loss Prospect</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    {{-- End Menu Prospect --}}
+
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -353,6 +375,8 @@
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+
+    
     
     @stack('custom-script')
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -360,6 +384,7 @@
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+    
 </body>
 
 </html>

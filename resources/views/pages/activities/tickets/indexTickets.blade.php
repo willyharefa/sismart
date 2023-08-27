@@ -18,6 +18,14 @@
             </div>
         @endif
 
+        {{-- Alert Fail --}}
+        @if ($message = Session::get('failed'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3 text-black" role="alert">
+                {{ $message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <div class="alert alert-primary text-black" role="alert">
             <h4 class="alert-heading mb-2">Information</h4>
             <p class="mb-0">Create your ticket to make activities, enjoy !</p>
@@ -105,6 +113,7 @@
                 <table id="example" class="table table-striped nowrap table-sm" width="100%">
                     <thead>
                         <tr>
+                            <th></th>
                             <th data-priority="1">#</th>
                             <th data-priority="2">Ticket</th>
                             <th data-priority="3">Company</th>
@@ -119,29 +128,37 @@
                     <tbody>
                         @foreach ($tickets as $key => $ticket)
                             <tr>
+                                <td>
+                                    @if ($ticket->status_ticket == 'prospect')
+                                        <i class='bx bxs-stopwatch text-success bx-sm'></i>
+                                    @elseif ($ticket->status_ticket == 'hot-prospect')
+                                        <i class='bx bxs-hot text-danger bx-sm'></i>
+                                    @endif
+                                </td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $ticket->cd_ticket }}</td>
                                 <td>{{ $ticket->konsumens->name_company }}</td>
                                 <td>{{ $ticket->type_customer->name_type_customer }}</td>
                                 <td>{{ $ticket->type_service->name_service }}</td>
                                 <td>{{ $ticket->sales_pic_a }}</td>
-                                <td>{{ $ticket->status }}</td>
+
+                                @if ($ticket->prospects == null)
+                                    <td>Draf</td>
+                                    <td>Draf</td>
+                                @elseif($ticket->prospects->type_action_id == null)
+                                    <td>Unavailable</td>
+                                    <td>Unavailable</td>
+                                @else
+                                    <td>{{ $ticket->prospects->type_action->status_action }}</td>
+                                    <td>{{ $ticket->prospects->type_action->name_action }}</td>
+                                @endif
+
                                 <td>
-                                    @if ($ticket->prospects == null)
-                                        Draf
-                                    @elseif($ticket->prospects->type_action_id == null)
-                                        Unavailable
-                                    @else
-                                        {{ $ticket->prospects->type_action->name_action }}
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($ticket->status == 'Draf')
+                                    @if ($ticket->status_ticket == 'draf')
                                         <!-- Modal Start Prospect-->
                                         <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#modalStartProspect_{{ $ticket->id }}">
                                             <i class='bx bx-play-circle'></i>
-                                            Start Prospect
                                         </button>
 
                                         <!-- Modal Start Prospect -->
@@ -209,8 +226,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col">
-                                                                <button type="submit" class="btn btn-primary">Create
-                                                                    Progress</button>
+                                                                <button type="submit" class="btn btn-primary">Create Progress</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -221,7 +237,6 @@
                                         <a type="button" class="btn btn-info btn-sm"
                                             href="{{ route('prospect.show', $ticket->prospects->id) }}">
                                             <i class='bx bxs-chevrons-up bx-flashing'></i>
-                                            Update Progress
                                         </a>
                                     @endif
                                     <a class="btn btn-warning btn-sm" href="{{ route('ticket.show', $ticket->id) }}">Edit</a>

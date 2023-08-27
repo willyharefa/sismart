@@ -21,4 +21,5 @@ import '../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar';
 import '../assets/vendor/js/menu';
 import '../assets/js/main';
 
+
 import './table-view';

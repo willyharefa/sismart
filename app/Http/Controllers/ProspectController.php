@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Prospect;
 use App\Models\Ticket;
 use App\Models\TypeAction;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -31,33 +32,31 @@ class ProspectController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        // dd($request->all());
-        $validateData = $request->validate([
-            'ticket_id' => 'required|string|max:255',
-            'type_action_id' => 'required|integer',
-            'date_progress' => 'required|date',
-            'issue' => 'required|string',
-            'desc_action' => 'required|string',
-            'remarks' => 'required|string'
-        ]);
-
-        if(!$validateData) {
-            return redirect()->back()->withErrors($validateData)->withInput();
-        }
-
+    {   
         try {
-            $ticket = Ticket::findOrFail($request->ticket_id);
-            $typeActions = TypeAction::findOrFail($request->type_action_id);
-            $ticket->update([
-                'status' => $typeActions->status_action
+            $validateData = Validator::make($request->all(), [
+                'ticket_id' => 'required|numeric',
+                'type_action_id' => 'required|numeric',
+                'date_progress' => 'required|date',
+                'issue' => 'required',
+                'desc_action' => 'required',
+                'remarks' => 'required'
             ]);
-        } catch (ModelNotFoundException $th) {
-            return redirect()->back()->with('failed', 'Data ticket tidak tersedia');
-        }
 
-        Prospect::create($validateData);
-        return redirect()->back()->with('success', 'Data prospect berhasil dibuat');
+            if ($validateData->fails()) {
+                return redirect()->back()->with('failed', 'Something wrong with you field!');
+            }
+
+            $typeAction = TypeAction::findOrFail($request->type_action_id);
+            Ticket::findOrFail($request->ticket_id)->update([
+                'status_ticket' => $typeAction->priority_action
+            ]);
+            Prospect::create($request->all());
+            return redirect()->back()->with('success', 'Data has been added');        
+
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('failed', 'You request cant be process!');
+        }
     }
 
     /**
@@ -86,10 +85,6 @@ class ProspectController extends Controller
      */
     public function update(Request $request, Prospect $prospect)
     {
-
-        $statusAction = TypeAction::findOrFail($request->type_action_id);
-        $ticket = Ticket::findOrFail($request->ticket_id);
-
         try {
             $validator = Validator::make($request->all(), [
                 'date_progress' => 'required|date',
@@ -103,8 +98,9 @@ class ProspectController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-            $ticket->update([
-                'status' => $statusAction->status_action
+            $typeAction = TypeAction::findOrFail($request->type_action_id);
+            Ticket::findOrFail($request->ticket_id)->update([
+                'status_ticket' => $typeAction->priority_action
             ]);
 
 
@@ -118,7 +114,7 @@ class ProspectController extends Controller
             return redirect()->route('ticket.index')->with('success', 'Progress action telah diupdate');
             
         } catch (\Throwable $th) {
-            throw $th;
+            return redirect()->back()->with('failed', 'You request cant be proccess!');
         }
     }
 

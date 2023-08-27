@@ -36,7 +36,8 @@ class TypeActionController extends Controller
         $validatedData = $request->validate([
             'name_action' => 'required|string',
             'status_action' => 'required|in:Prospect,Hot Prospect',
-            'detail_action' => 'required|string'
+            'detail_action' => 'required|string',
+            'priority_action' => 'required',
         ]);
 
         if(!$validatedData) {
@@ -75,7 +76,8 @@ class TypeActionController extends Controller
             $validator = Validator::make($request->all(), [
                 'name_action' => 'required',
                 'status_action' => 'required',
-                'detail_action' => 'required'
+                'detail_action' => 'required',
+                'priority_action' => 'required'
             ]);
 
             if ( $validator->fails() ) {

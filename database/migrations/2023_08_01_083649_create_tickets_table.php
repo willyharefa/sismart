@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('sales_pic_a');
             $table->string('sales_pic_b');
             $table->string('sales_pic_c');
-            $table->string('status');
+            $table->enum('status_ticket', ['draf', 'prospect', 'hot-prospect', 'final-prospect', 'loss-prospect', 'done']);
             $table->string('desc_ticket');
             $table->timestamps();
         });
