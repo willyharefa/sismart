@@ -105,7 +105,7 @@
         {{-- End Alert --}}
 
         {{-- Table Customer --}}
-        <div class="table-responsive mt-5">
+        <div class="mt-5">
             <div class="table">
                 <table id="example" class="table table-striped nowrap table-sm" width="100%">
                     <thead>

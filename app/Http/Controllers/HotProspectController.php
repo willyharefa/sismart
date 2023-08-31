@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Prospect;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HotProspectController extends Controller
 {
@@ -46,9 +47,11 @@ class HotProspectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($id)
     {
-        //
+        $ticket = Ticket::with('prospects', 'konsumens', 'type_service', 'type_customer')->find($id);
+        $pdf = PDF::loadView('pages.print.hotProspectData', compact('ticket'));
+        return $pdf->stream('penjualan.pdf');
     }
 
     /**
@@ -75,5 +78,11 @@ class HotProspectController extends Controller
     public function destroy()
     {
         //
+    }
+
+    public function printData()
+    {
+        
+
     }
 }
