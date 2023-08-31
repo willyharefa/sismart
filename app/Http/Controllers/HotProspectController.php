@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prospect;
 use App\Models\Ticket;
+use Illuminate\Http\Request;
 
 class HotProspectController extends Controller
 {
@@ -19,7 +20,7 @@ class HotProspectController extends Controller
         //     });
         // })->get(); // for searching data into child to child relation
 
-        $tickets = Ticket::with('prospects', 'konsumens', 'type_service', 'type_customer')->where('status_ticket', 'final-prospect')->latest()->get();
+        $tickets = Ticket::with('prospects', 'konsumens', 'type_service', 'type_customer')->where('status_ticket', 'final-prospect')->orWhere('status_ticket', 'done')->latest()->get();
         return view('pages.activities.prospect.hotProspect.indexHotProspect', [
             'title' => 'Hot Prospect Page',
             'menu_title' => 'prospects',
@@ -61,9 +62,11 @@ class HotProspectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(Request $request, $id)
     {
-        //
+        $ticket = Ticket::findOrFail($id);
+        $ticket->update(['status_ticket' => 'done']);
+        return redirect()->back()->with('success', 'Project has been mark as Done');
     }
 
     /**

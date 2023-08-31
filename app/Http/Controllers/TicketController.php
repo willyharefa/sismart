@@ -22,7 +22,7 @@ class TicketController extends Controller
         $typeActions = TypeAction::all();
         $type_services = TypeService::all();
         $type_customers = TypeCustomer::all();
-        $tickets = Ticket::with('prospects','konsumens', 'type_service', 'type_customer')->latest()->get();
+        $tickets = Ticket::with('prospects','konsumens', 'type_service', 'type_customer')->where('status_ticket', '!=', 'done')->latest()->get();
         return view('pages.activities.tickets.indexTickets', [
             'title'=> 'Ticket Page',
             'menu_title' => 'ticket'
