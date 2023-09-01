@@ -165,14 +165,14 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Users</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $menu_title == 'user' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-dock-top"></i>
                             <div data-i18n="Account Settings">Account Settings</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="pages-account-settings-account.html" class="menu-link">
+                                <a href="{{ route('user.index') }}" class="menu-link">
                                     <div data-i18n="Account">Account</div>
                                 </a>
                             </li>

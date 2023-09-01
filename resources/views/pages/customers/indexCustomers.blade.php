@@ -3,6 +3,7 @@
     <div class="wrapper-container">
         <legend>Data Customer</legend>
         {{-- Menu Add Customer  --}}
+        
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modalAddCustomer">
             + Add Customer

@@ -64,8 +64,6 @@
     </style>
 </head>
 <body>
-    
-
     <div class="wrapper-logo">
         <img class="logo_brand" src="{{ resource_path('images/logo.jpg') }}" alt="">
         <p class="sub_top_title">Komp. Taman Harapan Indah Blok C No.16 Jl. Riau Gg. Harapan 2 Kec. Payung Sekaki, Kota Pekanbaru</p>
