@@ -4,6 +4,13 @@
         <legend>Data Customer</legend>
 
 
+        @foreach ($errors->all() as $message)
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+        @endforeach
+
+
         {{-- Formulir Input User --}}
         <div class="wrapper-card">
             <div class="card">
@@ -15,10 +22,10 @@
                         @csrf
                         @method('POST')
                         <div class="row g-2 mb-3">
-                            <label for="single-select-field" class="col-sm-2 col-form-label">Profile</label>
+                            <label for="name_user" class="col-sm-2 col-form-label">Profile</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" name="name_user" required
-                                    placeholder="Full Name">
+                                <input type="text" class="form-control" id="name_user" name="name_user" required
+                                    placeholder="Full Name" autocomplete="true">
                             </div>
                             <div class="col-sm">
                                 <input type="text" class="form-control" name="employed_id" required
@@ -62,7 +69,7 @@
                                         <input type="password" class="form-control" name="password" required placeholder="Password">
                                     </div>
                                     <div class="col-sm">
-                                        <input type="password" class="form-control" name="password_confirm" required placeholder="Re-type Password">
+                                        <input type="password" class="form-control" name="password_confirmation" required placeholder="Re-type Password">
                                     </div>
                                 </div>
                             </div>

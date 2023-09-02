@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class UserController extends Controller
 {
@@ -31,7 +34,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+
+        $validatorData = Validator::make($request->all(), [
+            'name_user' => ['required'],
+            'employed_id' => ['required','unique:users,employed_id'],
+            'birth_date' => ['required','date'],
+            'gender' => ['required'],
+            'email' => ['required','email'],
+            'phone' => ['required'],
+            'branch' => ['required'],
+            'username' => ['required','unique:users,username'],
+            'password' => ['required','confirmed', RulesPassword::min(4)->letters()->mixedCase()->numbers()->uncompromised()],
+        ]);
+
+
+        if($validatorData->fails()) {
+            return redirect()->back()->withErrors($validatorData)->withInput();
+        }
+
+
     }
 
     /**
