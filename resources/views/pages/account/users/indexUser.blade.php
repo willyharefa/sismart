@@ -62,7 +62,7 @@
                                         <input type="password" class="form-control" name="password" required placeholder="Password">
                                     </div>
                                     <div class="col-sm">
-                                        <input type="password" class="form-control" name="password_confirm" required placeholder="Re-type Password">
+                                        <input type="password" class="form-control" name="password_confirmation" required placeholder="Re-type Password">
                                     </div>
                                 </div>
                             </div>
