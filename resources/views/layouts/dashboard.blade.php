@@ -82,8 +82,8 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item {{ $menu_title == 'home' ? 'active' : '' }}">
-                        <a href="{{ route('index') }}" class="menu-link">
+                    <li class="menu-item {{ $menu_title == 'dashboard' ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div>Dashboard</div>
                         </a>
@@ -188,20 +188,20 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $menu_title == 'authentication' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                             <div data-i18n="Authentications">Authentications</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Login</div>
+                                <a href="{{ route('role.index') }}" class="menu-link">
+                                    <div>Role</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Register</div>
+                                <a href="{{ route('permission.index') }}" class="menu-link">
+                                    <div>Permission</div>
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -245,6 +245,9 @@
                             </li>
                             <li class="menu-item">
                                 <a href="{{ route('type-service.index') }}" class="menu-link">Type Services</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('branch.index') }}" class="menu-link">Branches</a>
                             </li>
                         </ul>
                     </li>

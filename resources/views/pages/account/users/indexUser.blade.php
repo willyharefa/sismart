@@ -164,7 +164,7 @@
                                                             <div class="row g-2 mb-3">
                                                                 <div class="col-sm">
                                                                     <input type="text" class="form-control"
-                                                                        id="birth_date" readonly value="{{ date('d M Y', strtotime($user->birth_date))}}">
+                                                                        id="birth_date" readonly value="{{ date('d F Y', strtotime($user->birth_date))}}">
                                                                 </div>
                                                                 <div class="col-sm">
                                                                     <input type="text" class="form-control"
@@ -181,7 +181,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-sm btn-warning">Edit</button>
+                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                     <button class="btn btn-sm btn-danger">Delete</button>
                                 </td>
                             </tr>

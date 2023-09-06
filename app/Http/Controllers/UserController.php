@@ -80,7 +80,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('pages.account.users.updateUser', [
+            'title' => 'Update Page',
+            'menu_title' => 'user',
+        ], compact('user'));
     }
 
     /**
@@ -88,7 +91,49 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        try {
+            $validatorData = Validator::make($request->all(), [
+                'name_user' => ['required', 'min:5'],
+                'birth_date' => ['required', 'date'],
+                'gender' => ['required', 'in:Male, Female'],
+                'email' => ['required', 'email'],
+                'password' => ['required', 'confirmed', Password::min(5)],
+            ]);
+
+            if ($request->password !== null) {
+
+                if($validatorData->fails()) {
+                    return redirect()->back()->with('failed', 'Something wrong with you input');
+                };
+
+                $user->update([
+                    'name' => $request->name_user,
+                    'employed_id' => $request->employed_id,
+                    'birth_date' => $request->birth_date,
+                    'gender' => $request->gender,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'branch' => $request->branch,
+                    'username' => $request->username,
+                    'password' => Hash::make($request->password)
+                ]);
+                return redirect()->route('user.index')->with('success', 'Data has been edited');
+            } else {
+                $user->update([
+                    'name' => $request->name_user,
+                    'employed_id' => $request->employed_id,
+                    'birth_date' => $request->birth_date,
+                    'gender' => $request->gender,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'branch' => $request->branch,
+                    'username' => $request->username,
+                ]);
+                return redirect()->route('user.index')->with('success', 'Data has been edited');
+            }  
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('failed', 'You request cant be process...');
+        }
     }
 
     /**
