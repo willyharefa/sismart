@@ -4,15 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
-=======
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\Password as RulesPassword;
->>>>>>> 54454f4e3ad0724fd35146ef54d066f242ccca98
 
 class UserController extends Controller
 {
@@ -41,7 +35,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $validatorData = Validator::make($request->all(), [
             'name_user' => ['required', 'min:5'],
             'employed_id' => ['required', 'unique:users,employed_id'],
@@ -71,8 +64,6 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Data has been added!');
 
-        
-=======
         // dd($request->all());
 
         $validatorData = Validator::make($request->all(), [
@@ -84,16 +75,13 @@ class UserController extends Controller
             'phone' => ['required'],
             'branch' => ['required'],
             'username' => ['required','unique:users,username'],
-            'password' => ['required','confirmed', RulesPassword::min(4)->letters()->mixedCase()->numbers()->uncompromised()],
+            'password' => ['required','confirmed', Password::min(4)->letters()->mixedCase()->numbers()->uncompromised()],
         ]);
 
 
         if($validatorData->fails()) {
             return redirect()->back()->withErrors($validatorData)->withInput();
         }
-
-
->>>>>>> 54454f4e3ad0724fd35146ef54d066f242ccca98
     }
 
     /**

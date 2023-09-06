@@ -40,13 +40,8 @@
                         <div class="row g-2 mb-3">
                             <label for="name_user" class="col-sm-2 col-form-label">Profile</label>
                             <div class="col-sm-3">
-<<<<<<< HEAD
                                 <input type="text" class="form-control" name="name_user" required placeholder="Full Name"
                                     value="{{ old('name_user') }}">
-=======
-                                <input type="text" class="form-control" id="name_user" name="name_user" required
-                                    placeholder="Full Name" autocomplete="true">
->>>>>>> 54454f4e3ad0724fd35146ef54d066f242ccca98
                             </div>
                             <div class="col-sm">
                                 <input type="text" class="form-control" name="employed_id" required
@@ -99,12 +94,8 @@
                                             placeholder="Password">
                                     </div>
                                     <div class="col-sm">
-<<<<<<< HEAD
                                         <input type="password" class="form-control" name="password_confirmation" required
                                             placeholder="Re-type Password">
-=======
-                                        <input type="password" class="form-control" name="password_confirmation" required placeholder="Re-type Password">
->>>>>>> 54454f4e3ad0724fd35146ef54d066f242ccca98
                                     </div>
                                 </div>
                             </div>
