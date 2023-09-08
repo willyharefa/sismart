@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Branch;
 use App\Models\Konsumen;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,11 @@ class KonsumenController extends Controller
     public function index()
     {
         $customers = Konsumen::all();
-        // dd($customers);
+        $branches = Branch::all();
         return view('pages.customers.indexCustomers', [
             'title' => 'Customer',
             'menu_title' => 'customer'
-        ], compact('customers'));
+        ], compact(['customers', 'branches']));
     }
 
     /**
@@ -43,11 +44,11 @@ class KonsumenController extends Controller
      */
     public function show(Konsumen $konsumen)
     {
-        
+        $branches = Branch::all();
         return view('pages.customers.editCustomers', [
             'title' => 'Edit Customer',
             'menu_title' => 'customer'
-        ], compact('konsumen'));
+        ], compact('konsumen', 'branches'));
     }
 
     /**

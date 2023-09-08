@@ -67,16 +67,25 @@
                                     Please fill this field !
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-5">
                                 <label for="address" class="form-label">Address</label>
                                 <input type="text" class="form-control" id="address" name="address" required>
                                 <div class="invalid-feedback">
                                     Please fill this field !
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-sm">
                                 <label for="city" class="form-label">City</label>
                                 <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                            <div class="col-sm">
+                                <label for="branch" class="form-label">Branch</label>
+                                <select name="branch_id" id="branch" class="form-select" required>
+                                  <option value="">Choose Branch</option>
+                                  @foreach ($branches as $branch)
+                                      <option value="{{ $branch->id }}">{{ $branch->name_branch }}</option>
+                                  @endforeach
+                                </select>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
@@ -106,16 +115,15 @@
         {{-- End Alert --}}
 
         {{-- Table Customer --}}
-        <div class="mt-5">
+        <div class="bg-white p-3 rounded-3 mt-4 shadow">
             <div class="table">
                 <table id="example" class="table table-striped nowrap table-sm" width="100%">
                     <thead>
                         <tr>
                             <th data-priority="1">#</th>
                             <th data-priority="2">Company</th>
-                            <th>Type</th>
                             <th>NPWP</th>
-                            <th>Contact</th>
+                            <th>Phone</th>
                             <th>Email</th>
                             <th data-priority="4">City</th>
                             <th data-priority="3">Action</th>
@@ -126,7 +134,6 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $customer->name_company }}</td>
-                                <td>{{ $customer->type_company }}</td>
                                 <td>{{ $customer->npwp }}</td>
                                 <td>{{ $customer->contact_number }}</td>
                                 <td>{{ $customer->email }}</td>
@@ -150,55 +157,55 @@
                                             <div class="mb-3 row">
                                               <label for="name_company" class="col-md-3 col-form-label">Name Company</label>
                                               <div class="col-md-9">
-                                                <input type="text" readonly class="form-control-plaintext" id="name_company" value="{{ $customer->name_company }}">
+                                                <input type="text" readonly class="form-control" id="name_company" value="{{ $customer->name_company }}">
                                               </div>
                                             </div>
                                             <div class="mb-3 row">
                                               <label for="name_company" class="col-md-3 col-form-label">Type Company</label>
                                               <div class="col-md-9">
-                                                <input type="text" readonly class="form-control-plaintext" id="name_company" value="{{ $customer->type_company }}">
+                                                <input type="text" readonly class="form-control" id="name_company" value="{{ $customer->type_company }}">
                                               </div>
                                             </div>
                                             <div class="mb-3 row">
                                               <label for="npwp_company" class="col-md-3 col-form-label">NPWP</label>
                                               <div class="col-md-9">
-                                                <input type="text" readonly class="form-control-plaintext" id="npwp_company" value="{{ $customer->npwp }}">
+                                                <input type="text" readonly class="form-control" id="npwp_company" value="{{ $customer->npwp }}">
                                               </div>
                                             </div>
                                             <div class="mb-3 row">
-                                              <label for="contact_company" class="col-md-3 col-form-label">Contact Number</label>
+                                              <label for="phone_company" class="col-md-3 col-form-label">Phone Number</label>
                                               <div class="col-md-9">
-                                                <input type="text" readonly class="form-control-plaintext" id="contact_company" value="{{ $customer->contact_number }}">
+                                                <input type="text" readonly class="form-control" id="phone_company" value="{{ $customer->contact_number }}">
                                               </div>
                                             </div>
                                             <div class="mb-3 row">
                                               <label for="pic" class="col-md-3 col-form-label">PIC</label>
                                               <div class="col-md-9">
-                                                <input type="text" readonly class="form-control-plaintext" id="pic" value="{{ $customer->contact_manager }}">
+                                                <input type="text" readonly class="form-control" id="pic" value="{{ $customer->contact_manager }}">
                                               </div>
                                             </div>
                                             <div class="mb-3 row">
                                               <label for="email" class="col-md-3 col-form-label">Email</label>
                                               <div class="col-md-9">
-                                                <input type="text" readonly class="form-control-plaintext" id="email" value="{{ $customer->email }}">
+                                                <input type="text" readonly class="form-control" id="email" value="{{ $customer->email }}">
                                               </div>
                                             </div>
                                             <div class="mb-3 row">
                                               <label for="address" class="col-md-3 col-form-label">Address</label>
                                               <div class="col-md-9">
-                                                <input type="text" readonly class="form-control-plaintext" id="address" value="{{ $customer->address }}">
+                                                <input type="text" readonly class="form-control" id="address" value="{{ $customer->address }}">
                                               </div>
                                             </div>
                                             <div class="mb-3 row">
                                               <label for="city" class="col-md-3 col-form-label">City</label>
                                               <div class="col-md-9">
-                                                <input type="text" readonly class="form-control-plaintext" id="city" value="{{ $customer->city }}">
+                                                <input type="text" readonly class="form-control" id="city" value="{{ $customer->city }}">
                                               </div>
                                             </div>
-                                            <div class="mb-3 row">
+                                            <div class="row">
                                               <label for="city" class="col-md-3 col-form-label">Description Company</label>
                                               <div class="col-md-9">
-                                                <textarea readonly class="form-control-plaintext" id="city" rows="3">{{ $customer->desc_company }}</textarea>
+                                                <textarea readonly class="form-control" id="city" rows="3">{{ $customer->desc_company }}</textarea>
                                               </div>
                                             </div>
                                           </div>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('gender', ['Male', 'Female']);
             $table->string('email')->unique();
             $table->string('phone');
-            $table->string('branch');
+            $table->foreignId('branch_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();

@@ -15,7 +15,7 @@ class Ticket extends Model
 
     public function prospects(): HasOne
     {
-        return $this->hasOne(Prospect::class, 'id');
+        return $this->hasOne(Prospect::class, 'ticket_id');
     }
 
     public function konsumens(): BelongsTo

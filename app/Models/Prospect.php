@@ -16,7 +16,7 @@ class Prospect extends Model
 
     public function tickets(): BelongsTo
     {
-        return $this->belongsTo(Ticket::class, 'ticket_id');
+        return $this->belongsTo(Ticket::class, 'id');
     }
 
     public function type_action(): BelongsTo

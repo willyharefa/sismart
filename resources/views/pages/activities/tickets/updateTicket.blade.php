@@ -11,7 +11,7 @@
         {{-- Breadcrumb Navbar --}}
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('ticket.index') }}">Tickets</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('ticket.index') }}">Progress</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit</li>
             </ol>
         </nav>
@@ -39,7 +39,7 @@
         <div class="wrapper-card">
             <div class="card">
                 <div class="card-header">
-                    Formulir Tickets
+                    Formulir Progress
                 </div>
                 <div class="card-body">
                     <form class="needs-validation" action="{{ route('ticket.update', $ticket->id) }}" method="POST" novalidate>

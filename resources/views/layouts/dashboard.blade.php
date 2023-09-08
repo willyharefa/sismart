@@ -101,7 +101,7 @@
                     <li class="menu-item {{ $menu_title == 'ticket' ? 'active' : '' }}">
                         <a href="{{ route('ticket.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-collection"></i>
-                            <div>Ticket</div>
+                            <div>Progress</div>
                         </a>
                     </li>
 
@@ -119,48 +119,13 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <div data-i18n="Without navbar">Loss Prospect</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     {{-- End Menu Prospect --}}
-
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Administrator</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Without menu</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Without navbar</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-container.html" class="menu-link">
-                                    <div data-i18n="Container">Container</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-fluid.html" class="menu-link">
-                                    <div data-i18n="Fluid">Fluid</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-blank.html" class="menu-link">
-                                    <div data-i18n="Blank">Blank</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Users</span>
@@ -176,18 +141,10 @@
                                     <div data-i18n="Account">Account</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="pages-account-settings-notifications.html" class="menu-link">
-                                    <div data-i18n="Notifications">Notifications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="pages-account-settings-connections.html" class="menu-link">
-                                    <div data-i18n="Connections">Connections</div>
-                                </a>
-                            </li>
                         </ul>
                     </li>
+
+                    {{-- Menu Authentication --}}
                     <li class="menu-item {{ $menu_title == 'authentication' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -204,31 +161,10 @@
                                     <div>Permission</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Forgot Password</div>
-                                </a>
-                            </li>
                         </ul>
                     </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                            <div data-i18n="Misc">Misc</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="pages-misc-error.html" class="menu-link">
-                                    <div data-i18n="Error">Error</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="pages-misc-under-maintenance.html" class="menu-link">
-                                    <div data-i18n="Under Maintenance">Under Maintenance</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    
+                    
                     <!-- Customize -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Customize</span></li>
                     <li class="menu-item {{ $menu_title == 'custom-services' ? 'active' : '' }}">

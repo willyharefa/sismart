@@ -22,9 +22,9 @@ class TicketController extends Controller
         $typeActions = TypeAction::all();
         $type_services = TypeService::all();
         $type_customers = TypeCustomer::all();
-        $tickets = Ticket::with('prospects','konsumens', 'type_service', 'type_customer')->where('status_ticket', '!=', 'done')->latest()->get();
+        $tickets = Ticket::with('prospects','konsumens', 'type_service', 'type_customer')->where('status_ticket', '!=', 'done')->get();
         return view('pages.activities.tickets.indexTickets', [
-            'title'=> 'Ticket Page',
+            'title'=> 'Progress Page',
             'menu_title' => 'ticket'
         ], compact('tickets', 'konsumens', 'typeActions', 'type_services', 'type_customers'));
     }
@@ -59,7 +59,7 @@ class TicketController extends Controller
         $type_customers = TypeCustomer::all();
         $type_services = TypeService::all(); 
         return view('pages.activities.tickets.updateTicket', [
-            'title' => 'Update Ticket',
+            'title' => 'Update Progress',
             'menu_title' => 'ticket'
         ], compact('ticket', 'konsumens', 'type_customers', 'type_services'));
     }

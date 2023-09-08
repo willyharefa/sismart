@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('city');
+            $table->foreignId('branch_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+
+            //$table->foreignId('konsumen_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->text('desc_company');
             $table->timestamps();
         });

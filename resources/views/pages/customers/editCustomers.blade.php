@@ -43,13 +43,22 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" value="{{ $konsumen->email }}" name="email" required>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-5">
                         <label for="address" class="form-label">Address</label>
                         <input type="text" class="form-control" id="address" value="{{ $konsumen->address }}" name="address" required>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-sm">
                         <label for="city" class="form-label">City</label>
                         <input type="text" class="form-control" id="city" value="{{ $konsumen->city }}" name="city" required>
+                    </div>
+                    <div class="col-sm">
+                        <label for="branch_id" class="form-label">Branch</label>
+                        <select name="branch_id" id="branch" class="form-select" required>
+                            <option value="">Choose Branch</option>
+                            @foreach ($branches as $branch)
+                                <option value="{{ $branch->id }}" {{ $konsumen->branch_id == $branch->id ? "selected" : "" }}>{{ $branch->name_branch }}</option>
+                            @endforeach
+                          </select>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">

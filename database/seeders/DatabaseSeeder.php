@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            BranchSeeder::class,
             TypeActionSeeder::class,
             TypeCustomerSeeder::class,
             TypeServiceSeeder::class

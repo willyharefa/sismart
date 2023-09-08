@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="wrapper-container">
-        <legend class="mb-4">Tickets Page</legend>
+        <legend class="mb-4">Progress Page</legend>
 
         {{-- Alert Success --}}
         @if ($message = Session::get('success'))
@@ -108,20 +108,20 @@
 
 
         {{-- Table Tickets --}}
-        <div class="table-responsive mt-5">
+        <div class="mt-4">
             <div class="table">
                 <table id="example" class="table table-striped nowrap table-sm" width="100%">
                     <thead>
                         <tr>
                             <th></th>
-                            <th data-priority="1">#</th>
-                            <th data-priority="2">Ticket</th>
-                            <th data-priority="3">Company</th>
+                            <th>#</th>
+                            <th data-priority="1">Ticket</th>
+                            <th data-priority="2">Company</th>
                             <th>Type Bussiness</th>
                             <th>Type Services</th>
                             <th>Sales</th>
-                            <th data-priority="5">Status</th>
-                            <th data-priority="6">Progress</th>
+                            <th data-priority="3">Status</th>
+                            <th data-priority="5">Progress</th>
                             <th data-priority="4">Action</th>
                         </tr>
                     </thead>
